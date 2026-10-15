@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriSmart AI — Smart Crop Recommendation System</title>
+  <meta name="description" content="A transparent, rule-based crop recommendation engine that helps farmers choose suitable crops based on soil, climate, water availability, and crop rotation history.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#home" class="logo" aria-label="AgriSmart AI Home">
+        <div class="logo-icon">
+          <!-- Sprout / Leaf SVG Icon -->
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 20h10" />
+            <path d="M10 20c0-4 1-8 6-10" />
+            <path d="M16 10c0-4.5-3.5-7-7-7-2 4 0 9 5 11" />
+            <path d="M12 20c0-2.5.5-5 3-7" />
+          </svg>
+        </div>
+        <span>AgriSmart <span style="color: var(--color-leaf);">AI</span></span>
+        <span class="logo-badge">RULE-BASED</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#farmDetailsForm" class="nav-link">Crop Recommendation</a></li>
+          <li><a href="#cropLibrary" class="nav-link">Crop Library</a></li>
+          <li><a href="#howItWorks" class="nav-link">How It Works</a></li>
+          <li><a href="#history" class="nav-link">History</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-selector-wrapper">
+          <select id="languageSelect" class="lang-select" aria-label="Select Language">
+            <option value="en">English (EN)</option>
+            <option value="hi">हिंदी (HI)</option>
+          </select>
+        </div>
+
+        <button class="mobile-menu-btn" id="mobileToggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <main>
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span>Intelligent Agronomic Decision Engine</span>
+          </div>
+
+          <h1 class="hero-title" data-i18n="heroTitle">
+            Grow Smarter. <span class="highlight">Harvest Better.</span>
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="heroSubtitle">
+            Discover the right crops for your soil, climate, and water availability.
+          </p>
+
+          <p class="hero-supporting" data-i18n="heroSupporting">
+            Make more informed farming decisions with simple, data-driven crop recommendations.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#farmDetailsForm" class="btn btn-primary" data-i18n="btnGetRecommendations">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 12 8"></polygon>
+              </svg>
+              Get Crop Recommendations
+            </a>
+            <a href="#cropLibrary" class="btn btn-secondary" data-i18n="btnExploreLibrary">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              Explore Crop Library
+            </a>
+          </div>
+
+          <div class="hero-indicators">
+            <div class="indicator-card">
+              <div class="indicator-icon">
+                <!-- Soil Layers Icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <span class="indicator-label" data-i18n="indicatorSoil">Soil-aware recommendations</span>
+            </div>
+
+            <div class="indicator-card">
+              <div class="indicator-icon">
+                <!-- Water Droplet Icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                </svg>
+              </div>
+              <span class="indicator-label" data-i18n="indicatorWater">Water-conscious crop selection</span>
+            </div>
+
+            <div class="indicator-card">
+              <div class="indicator-icon">
+                <!-- Crop Rotation Icon -->
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+              </div>
+              <span class="indicator-label" data-i18n="indicatorRotation">Crop rotation awareness</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Agricultural Illustration in Pure SVG -->
+        <div class="hero-visual">
+          <svg class="hero-svg-art" viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sky and Warm Sun -->
+            <rect width="460" height="380" rx="28" fill="#F0F7F2"/>
+            <circle cx="370" cy="90" r="48" fill="#FDE68A" opacity="0.85"/>
+            <circle cx="370" cy="90" r="62" fill="#FEF3C7" opacity="0.45"/>
+            
+            <!-- Rolling Hills Background -->
+            <path d="M-10 270 Q 110 200, 240 240 T 470 210 L 470 390 L -10 390 Z" fill="#A7D7A9" opacity="0.6"/>
+            <path d="M-20 290 Q 140 220, 290 260 T 480 240 L 480 390 L -20 390 Z" fill="#76B947" opacity="0.5"/>
+            <path d="M-10 310 Q 160 250, 310 290 T 480 270 L 480 390 L -10 390 Z" fill="#2E7D32"/>
+            
+            <!-- Terraced Farmland Rows -->
+            <path d="M30 380 Q 180 300, 380 320" stroke="#12372A" stroke-width="2.5" stroke-dasharray="6 6"/>
+            <path d="M0 350 Q 200 280, 440 300" stroke="#12372A" stroke-width="2.5" stroke-dasharray="6 6"/>
+
+            <!-- Golden Crops & Wheat Sheaves -->
+            <g transform="translate(60, 220)">
+              <path d="M0 70 V 20 M0 20 Q 8 10, 16 18 Q 8 26, 0 20 M0 28 Q -8 18, -16 26 Q -8 34, 0 28 M0 36 Q 8 28, 16 36 Q 8 44, 0 36" stroke="#D97706" stroke-width="3" stroke-linecap="round"/>
+              <path d="M22 75 V 30 M22 30 Q 30 20, 38 28 Q 30 36, 22 30 M22 38 Q 14 28, 6 36 Q 14 44, 22 38" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+            </g>
+
+            <g transform="translate(140, 205)">
+              <!-- Healthy Sprouting Crop -->
+              <path d="M0 80 C 5 50, -5 30, 0 10" stroke="#16A34A" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M0 35 C 15 25, 25 35, 30 20 C 22 15, 10 25, 0 30" fill="#76B947"/>
+              <path d="M0 48 C -15 38, -25 48, -30 33 C -22 28, -10 38, 0 43" fill="#76B947"/>
+            </g>
+
+            <g transform="translate(230, 195)">
+              <path d="M0 90 C 8 60, -2 40, 4 15" stroke="#16A34A" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M2 40 C 20 28, 32 40, 38 22 C 28 18, 12 30, 2 35" fill="#76B947"/>
+              <path d="M2 55 C -18 42, -28 55, -34 38 C -24 32, -10 44, 2 50" fill="#76B947"/>
+            </g>
+
+            <!-- Floating Data & Water Droplet Emblem -->
+            <g transform="translate(320, 140)">
+              <rect width="110" height="70" rx="14" fill="#FFFFFF" filter="drop-shadow(0 8px 16px rgba(18, 55, 42, 0.12))"/>
+              <circle cx="28" cy="35" r="14" fill="#E0F2FE"/>
+              <path d="M28 27 C 28 27, 34 35, 34 38 C 34 41.3, 31.3 44, 28 44 C 24.7 44, 22 41.3, 22 38 C 22 35, 28 27, 28 27 Z" fill="#0284C7"/>
+              <rect x="50" y="26" width="46" height="7" rx="3.5" fill="#2E7D32"/>
+              <rect x="50" y="38" width="30" height="6" rx="3" fill="#A7D7A9"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transparent Agronomy Notice -->
+    <div class="container">
+      <div class="prototype-banner">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <div>
+          <strong>Transparent Agronomic Prototype:</strong> AgriSmart AI simulates intelligent decision-making using established agricultural extension rules, ICAR guidelines, and verified crop threshold matrices. All calculations happen locally in your browser without external black-box models or third-party APIs.
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         FARM DETAILS FORM SECTION
+         ========================================================================== -->
+    <section class="form-section" id="farmDetailsForm">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="formTitle">Tell Us About Your Farm</span>
+          <h2 class="section-title">Farm Details & Soil Health Input</h2>
+          <p class="section-description" data-i18n="formSubtitle">
+            Enter your field parameters below to calculate agronomic compatibility with our crop database.
+          </p>
+        </div>
+
+        <!-- Quick-Fill Presets for Hackathon Testing -->
+        <div class="presets-container">
+          <span class="presets-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span data-i18n="presetLabel">Quick Test Presets:</span>
+          </span>
+          <button type="button" class="preset-chip" data-preset="punjabWheat">🌾 Punjab Alluvial (Wheat / Rabi)</button>
+          <button type="button" class="preset-chip" data-preset="maharashtraCotton">🌱 Maharashtra Black Soil (Cotton / Kharif)</button>
+          <button type="button" class="preset-chip" data-preset="bengalPaddy">🌾 West Bengal Delta (Rice / Kharif)</button>
+          <button type="button" class="preset-chip" data-preset="rajasthanBajra">🏜️ Rajasthan Sandy Soil (Bajra / Kharif)</button>
+        </div>
+
+        <form id="farmForm" class="farm-form-card">
+          <div class="form-grid-sections">
+            
+            <!-- SECTION A: LOCATION & GROWING SEASON -->
+            <div class="form-sub-section">
+              <div class="sub-section-header">
+                <div class="sub-section-badge">A</div>
+                <h3 class="sub-section-title" data-i18n="secALabel">A. Location & Growing Season</h3>
+                <span class="sub-section-desc" data-i18n="secADesc">Geographical & calendar context</span>
+              </div>
+
+              <div class="fields-grid-4">
+                <div class="form-group">
+                  <label for="farmState" class="form-label">
+                    <span>State / Region</span>
+                    <span class="form-label-tag">Required</span>
+                  </label>
+                  <select id="farmState" class="form-control" required>
+                    <option value="" disabled selected>Select State</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="farmDistrict" class="form-label">
+                    <span>District</span>
+                    <span class="form-label-tag">Required</span>
+                  </label>
+                  <input type="text" id="farmDistrict" class="form-control" placeholder="e.g. Ludhiana, Nagpur" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="farmVillage" class="form-label">
+                    <span>Village / Block</span>
+                    <span class="form-label-tag">Optional</span>
+                  </label>
+                  <input type="text" id="farmVillage" class="form-control" placeholder="e.g. Rampur">
+                </div>
+
+                <div class="form-group">
+                  <label for="growingSeason" class="form-label">
+                    <span>Growing Season</span>
+                    <span class="form-label-tag">Required</span>
+                  </label>
+                  <select id="growingSeason" class="form-control" required>
+                    <option value="Kharif">Kharif (Monsoon: Jun - Oct)</option>
+                    <option value="Rabi">Rabi (Winter: Oct - Mar)</option>
+                    <option value="Zaid">Zaid (Summer: Mar - Jun)</option>
+                    <option value="Unknown">Unknown / All Year Round</option>
+                  </select>
+                </div>
+              </div>
+              <small style="color: var(--color-muted); font-size: 0.78rem; display: block; margin-top: 0.6rem;">
+                * Location parameters are entered manually for rule evaluation. AgriSmart AI does not access device GPS tracking.
+              </small>
+            </div>
+
+            <!-- SECTION B: SOIL INFORMATION & NUTRIENTS -->
+            <div class="form-sub-section">
+              <div class="sub-section-header">
+                <div class="sub-section-badge">B</div>
+                <h3 class="sub-section-title" data-i18n="secBLabel">B. Soil Information & Nutrients (NPK)</h3>
+                <span class="sub-section-desc" data-i18n="secBDesc">Soil texture & chemical profile</span>
+              </div>
+
+              <div class="fields-grid-2" style="margin-bottom: 1.25rem;">
+                <div class="form-group">
+                  <label for="soilType" class="form-label">
+                    <span>Soil Type</span>
+                    <span class="form-label-tag">Primary Texture</span>
+                  </label>
+                  <select id="soilType" class="form-control" required>
+                    <option value="Alluvial">Alluvial Soil (Fertile silt & loams)</option>
+                    <option value="Black">Black Soil / Regur (High clay & moisture)</option>
+                    <option value="Red">Red / Yellow Soil (Iron rich, porous)</option>
+                    <option value="Loamy">Loamy Soil (Balanced sand & clay)</option>
+                    <option value="Sandy">Sandy Soil (High drainage, low retention)</option>
+                    <option value="Clay">Clay Soil (Heavy, water-retentive)</option>
+                    <option value="Other">Other / Mixed Soil</option>
+                  </select>
+                </div>
+
+                <div class="form-group ph-slider-wrapper">
+                  <div class="ph-slider-header">
+                    <label for="soilPhSlider" class="form-label" style="margin-bottom: 0;">
+                      <span>Soil Reaction (pH Level)</span>
+                    </label>
+                    <span id="phValueDisplay" class="ph-value-badge">6.8 (Neutral)</span>
+                  </div>
+                  <input type="range" id="soilPhSlider" class="range-slider" min="4.0" max="9.5" step="0.1" value="6.8" aria-label="Soil pH Slider">
+                  <div class="ph-scale-labels">
+                    <span>4.0 (Very Acidic)</span>
+                    <span>6.5 - 7.5 (Optimal Neutral)</span>
+                    <span>9.5 (Strong Alkaline)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NPK Inputs -->
+              <div class="fields-grid-3">
+                <div class="form-group">
+                  <label for="soilN" class="form-label">
+                    <span>Nitrogen (N)</span>
+                    <span class="form-label-tag">kg/ha</span>
+                  </label>
+                  <input type="number" id="soilN" class="form-control" min="0" max="400" value="90" placeholder="e.g. 90" required>
+                  <small style="font-size: 0.72rem; color: var(--color-muted);">Typical: Low &lt;50, Med 50-140, High &gt;140</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="soilP" class="form-label">
+                    <span>Phosphorus (P)</span>
+                    <span class="form-label-tag">kg/ha</span>
+                  </label>
+                  <input type="number" id="soilP" class="form-control" min="0" max="250" value="45" placeholder="e.g. 45" required>
+                  <small style="font-size: 0.72rem; color: var(--color-muted);">Typical: Low &lt;20, Med 20-60, High &gt;60</small>
+                </div>
+
+                <div class="form-group">
+                  <label for="soilK" class="form-label">
+                    <span>Potassium (K)</span>
+                    <span class="form-label-tag">kg/ha</span>
+                  </label>
+                  <input type="number" id="soilK" class="form-control" min="0" max="400" value="40" placeholder="e.g. 40" required>
+                  <small style="font-size: 0.72rem; color: var(--color-muted);">Typical: Low &lt;30, Med 30-100, High &gt;100</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION C: CLIMATE & WATER AVAILABILITY -->
+            <div class="form-sub-section">
+              <div class="sub-section-header">
+                <div class="sub-section-badge">C</div>
+                <h3 class="sub-section-title" data-i18n="secCLabel">C. Climate & Water Availability</h3>
+                <span class="sub-section-desc" data-i18n="secCDesc">Local weather conditions & irrigation</span>
+              </div>
+
+              <div class="fields-grid-4">
+                <div class="form-group">
+                  <label for="avgTemp" class="form-label">
+                    <span>Avg Temperature</span>
+                    <span class="form-label-tag">°C</span>
+                  </label>
+                  <input type="number" id="avgTemp" class="form-control" min="5" max="50" step="0.5" value="25" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="humidity" class="form-label">
+                    <span>Relative Humidity</span>
+                    <span class="form-label-tag">%</span>
+                  </label>
+                  <input type="number" id="humidity" class="form-control" min="10" max="100" value="60" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="rainfall" class="form-label">
+                    <span>Expected Rainfall</span>
+                    <span class="form-label-tag">mm / year</span>
+                  </label>
+                  <input type="number" id="rainfall" class="form-control" min="100" max="4000" value="800" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="waterAvailability" class="form-label">
+                    <span>Irrigation Availability</span>
+                    <span class="form-label-tag">Capacity</span>
+                  </label>
+                  <select id="waterAvailability" class="form-control" required>
+                    <option value="High">High (Assured Canal / Perennial Borewell)</option>
+                    <option value="Moderate" selected>Moderate (Seasonal Tubewell / Semi-assured)</option>
+                    <option value="Low">Low (Rainfed / Dryland / Drought-prone)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION D: PREVIOUS CROP & ROTATION HISTORY -->
+            <div class="form-sub-section">
+              <div class="sub-section-header">
+                <div class="sub-section-badge">D</div>
+                <h3 class="sub-section-title" data-i18n="secDLabel">D. Previous Crop & History</h3>
+                <span class="sub-section-desc" data-i18n="secDDesc">Previous cropping sequence</span>
+              </div>
+
+              <div class="fields-grid-2">
+                <div class="form-group">
+                  <label for="prevCrop" class="form-label">
+                    <span>Previous Crop Harvested</span>
+                    <span class="form-label-tag">Rotation Factor</span>
+                  </label>
+                  <select id="prevCrop" class="form-control">
+                    <option value="None / Fallow Land">None / Fallow Land (Fresh Soil)</option>
+                    <option value="Legumes / Pulses (Gram/Moong)">Legumes / Pulses (Gram, Moong - Nitrogen Fixers)</option>
+                    <option value="Cereals (Paddy/Maize)" selected>Cereals (Rice, Wheat, Maize - Heavy Nutrient Feeders)</option>
+                    <option value="Cash / Fiber (Cotton/Sugarcane)">Cash / Fiber (Cotton, Sugarcane - Deep Roots)</option>
+                    <option value="Oilseeds (Mustard/Soybean)">Oilseeds (Mustard, Groundnut, Soybean)</option>
+                    <option value="Vegetables / Tubers (Potato)">Vegetables / Tubers (Potato, Tomato)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="irrigationType" class="form-label">
+                    <span>Irrigation Method Used</span>
+                    <span class="form-label-tag">Infrastructure</span>
+                  </label>
+                  <select id="irrigationType" class="form-control">
+                    <option value="Flood / Furrow">Flood / Furrow Irrigation</option>
+                    <option value="Drip Irrigation">Micro Drip Irrigation</option>
+                    <option value="Sprinkler">Sprinkler Irrigation</option>
+                    <option value="Rainfed Only">Strictly Rainfed</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-actions-footer">
+            <button type="reset" class="btn btn-secondary" data-i18n="btnReset">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              Reset Form
+            </button>
+            <button type="submit" class="btn btn-primary" data-i18n="btnAnalyze">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              Analyze & Recommend Crops
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         RECOMMENDATION RESULTS SECTION
+         ========================================================================== -->
+    <section class="results-section hidden" id="resultsSection">
+      <div class="container">
+        
+        <!-- Local calculation loading state -->
+        <div id="loadingBox" class="loading-box">
+          <div class="loading-spinner"></div>
+          <h3 class="loading-title">Evaluating Agronomic Compatibility...</h3>
+          <p class="loading-status">Analyzing soil texture, pH balance, moisture indices, and crop rotation synergy...</p>
+        </div>
+
+        <!-- Result Container -->
+        <div id="recommendationsContent" class="recommendations-wrapper" style="display: none;">
+          <div class="section-header" style="margin-bottom: 1.5rem;">
+            <span class="section-tag">Agronomic Analysis Complete</span>
+            <h2 class="section-title" data-i18n="resultsHeading">Recommended Crops For Your Farm</h2>
+            <p class="section-description" data-i18n="resultsSub">
+              Top 3 crops evaluated for highest agronomic suitability and yield security.
+            </p>
+          </div>
+
+          <div class="recommendations-header-bar">
+            <div id="farmSummaryTag" class="farm-summary-tag">
+              📍 Evaluation Profile
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <button class="btn btn-secondary" onclick="window.print()" style="font-size: 0.85rem; padding: 0.45rem 0.9rem;" data-i18n="btnPrintReport">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print Advisory Report
+              </button>
+            </div>
+          </div>
+
+          <!-- Top 3 Crop Cards Grid -->
+          <div id="recommendationsGrid" class="recommendations-grid">
+            <!-- Dynamically populated by script.js -->
+          </div>
+
+          <!-- Comprehensive Advisory Section below the 3 cards -->
+          <div id="detailedAdvisoryWrap">
+            <!-- Dynamically populated by script.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CROP LIBRARY SECTION
+         ========================================================================== -->
+    <section class="library-section" id="cropLibrary">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Agronomy Knowledge Base</span>
+          <h2 class="section-title" data-i18n="libraryTitle">Agricultural Crop Library</h2>
+          <p class="section-description" data-i18n="libraryDesc">
+            Browse detailed agronomic specifications, climatic tolerance, and cultivation practices for major crops.
+          </p>
+        </div>
+
+        <div class="library-filter-bar">
+          <input type="text" id="librarySearchInput" class="form-control library-search-input" placeholder="🔍 Search crop by name or category...">
+
+          <div class="filter-chips-group">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-forest);">Season:</span>
+            <button type="button" class="filter-chip-btn season-filter-chip active" data-filter="All">All</button>
+            <button type="button" class="filter-chip-btn season-filter-chip" data-filter="Kharif">Kharif</button>
+            <button type="button" class="filter-chip-btn season-filter-chip" data-filter="Rabi">Rabi</button>
+            <button type="button" class="filter-chip-btn season-filter-chip" data-filter="Zaid">Zaid</button>
+          </div>
+
+          <div class="filter-chips-group">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--color-forest);">Water Need:</span>
+            <button type="button" class="filter-chip-btn water-filter-chip active" data-filter="All">All</button>
+            <button type="button" class="filter-chip-btn water-filter-chip" data-filter="Low">Low</button>
+            <button type="button" class="filter-chip-btn water-filter-chip" data-filter="Moderate">Moderate</button>
+            <button type="button" class="filter-chip-btn water-filter-chip" data-filter="High">High</button>
+          </div>
+        </div>
+
+        <!-- Crop Library Grid -->
+        <div id="cropLibraryGrid" class="crop-library-grid">
+          <!-- Dynamically populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HOW IT WORKS SECTION
+         ========================================================================== -->
+    <section class="how-section" id="howItWorks">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Scientific Methodology</span>
+          <h2 class="section-title">How AgriSmart AI Evaluates Crops</h2>
+          <p class="section-description">
+            A transparent, deterministic agronomy decision model based on ICAR standards and agricultural science.
+          </p>
+        </div>
+
+        <div class="how-steps-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3 class="step-title">Soil Compatibility</h3>
+            <p class="step-desc">
+              Checks physical soil texture (Alluvial, Black, Clay, Loam, Sandy) against the crop's root anchorage and drainage needs.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3 class="step-title">Climate & Temperature</h3>
+            <p class="step-desc">
+              Matches ambient seasonal temperature, humidity bounds, and precipitation thresholds with crop phenology.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3 class="step-title">Water Availability</h3>
+            <p class="step-desc">
+              Cross-references farm irrigation infrastructure and rainfall to prevent moisture deficit or waterlogging stress.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h3 class="step-title">Rotation Synergy</h3>
+            <p class="step-desc">
+              Applies agronomic rotation rules (+10% for legumes following cereals, penalty for repeating exhaustive monocultures).
+            </p>
+          </div>
+        </div>
+
+        <!-- Decision Matrix Breakdown Card -->
+        <div class="rule-matrix-card">
+          <div class="rule-matrix-header">
+            <h3 class="rule-matrix-title">Transparent Decision Matrix Weights</h3>
+            <p class="rule-matrix-subtitle">
+              Every crop score is deterministically calculated using these agronomic weights:
+            </p>
+          </div>
+
+          <div class="matrix-points-grid">
+            <div class="matrix-point">
+              <div class="matrix-point-name">Soil Texture (25%)</div>
+              <div class="matrix-point-detail">Evaluates root aeration, soil moisture retention, and tillage requirements.</div>
+            </div>
+
+            <div class="matrix-point">
+              <div class="matrix-point-name">Climate & Rainfall (25%)</div>
+              <div class="matrix-point-detail">Compares temperature comfort zone, relative humidity, and precipitation tolerance.</div>
+            </div>
+
+            <div class="matrix-point">
+              <div class="matrix-point-name">Water Capacity (20%)</div>
+              <div class="matrix-point-detail">Guarantees crop water demand matches available canal or borewell supply.</div>
+            </div>
+
+            <div class="matrix-point">
+              <div class="matrix-point-name">Growing Season (15%)</div>
+              <div class="matrix-point-detail">Confirms photoperiod and temperature alignment (Kharif, Rabi, or Zaid).</div>
+            </div>
+
+            <div class="matrix-point">
+              <div class="matrix-point-name">Soil pH Balance (10%)</div>
+              <div class="matrix-point-detail">Ensures soil acidity/alkalinity does not lock essential micronutrients.</div>
+            </div>
+
+            <div class="matrix-point">
+              <div class="matrix-point-name">Rotation Synergy (±10%)</div>
+              <div class="matrix-point-detail">Rewards nitrogen-fixing legume transitions and penalizes pest-accumulating monocultures.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HISTORY SECTION
+         ========================================================================== -->
+    <section class="history-section" id="history">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Saved Recommendations</span>
+          <h2 class="section-title" data-i18n="historyTitle">Recommendation History</h2>
+          <p class="section-description">
+            Access previous farm evaluations stored securely in your browser's local storage.
+          </p>
+        </div>
+
+        <div class="history-header-actions">
+          <button id="clearHistoryBtn" class="btn btn-secondary" style="display: none; font-size: 0.85rem;" onclick="clearAllHistory()" data-i18n="clearHistoryBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            Clear All History
+          </button>
+        </div>
+
+        <div id="historyListContainer" class="history-list">
+          <!-- Dynamically populated by script.js -->
+        </div>
+
+        <div id="historyEmptyState" class="empty-state">
+          <div class="empty-state-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <h3 class="empty-state-title" data-i18n="emptyHistoryTitle">No Previous Recommendations Yet</h3>
+          <p class="empty-state-desc" data-i18n="emptyHistoryDesc">
+            Fill the farm details form above to generate and save your customized crop advisory report.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       CROP DETAIL MODAL
+       ========================================================================== -->
+  <div id="cropModalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalCropTitle">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="cropModalClose" aria-label="Close modal">✕</button>
+      <div id="cropModalBody" class="modal-content">
+        <!-- Dynamically populated by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#76B947" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 20h10" />
+              <path d="M10 20c0-4 1-8 6-10" />
+              <path d="M16 10c0-4.5-3.5-7-7-7-2 4 0 9 5 11" />
+            </svg>
+            <span>AgriSmart AI</span>
+          </div>
+          <p class="footer-desc">
+            A beginner-friendly, offline-ready crop advisory system designed to empower farmers with transparent agronomic decision-making.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home" class="footer-link">Home</a></li>
+            <li><a href="#farmDetailsForm" class="footer-link">Crop Recommendation</a></li>
+            <li><a href="#cropLibrary" class="footer-link">Crop Library</a></li>
+            <li><a href="#howItWorks" class="footer-link">Decision Logic</a></li>
+            <li><a href="#history" class="footer-link">Saved History</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Agronomy Focus</h4>
+          <ul class="footer-links">
+            <li><span class="footer-link">Soil Chemistry (pH & NPK)</span></li>
+            <li><span class="footer-link">Water Resource Accounting</span></li>
+            <li><span class="footer-link">Legume-Cereal Rotation</span></li>
+            <li><span class="footer-link">Integrated Pest Management</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Prototype Notice</h4>
+          <p class="footer-desc" style="font-size: 0.82rem;">
+            Built strictly using HTML5, CSS3, and Vanilla JavaScript. Operates 100% locally in the browser with no external AI, APIs, or data collection.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 AgriSmart AI — Smart Crop Recommendation System. Developed for Agronomy & Hackathon Innovation.</span>
+        <span>Offline-Capable • Privacy-Preserving • Rule-Based</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Core Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>
